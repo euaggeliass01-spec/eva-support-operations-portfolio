@@ -1,0 +1,39 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "preferredVersions": {
+    "php": "8.2",
+    "wp": "latest"
+  },
+  "landingPage": "/wp-admin/edit.php?post_type=product",
+  "login": true,
+  "siteOptions": {
+    "blogname": "Northwind Studio — WooCommerce Support Lab",
+    "blogdescription": "A disposable store for support and troubleshooting exercises"
+  },
+  "steps": [
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "storefront"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\nif (!class_exists('WooCommerce')) {\n    echo 'WooCommerce is not active.';\n    return;\n}\n\nupdate_option('woocommerce_currency', 'EUR');\nupdate_option('woocommerce_default_country', 'DE');\nupdate_option('woocommerce_enable_guest_checkout', 'yes');\nupdate_option('woocommerce_calc_taxes', 'yes');\nupdate_option('woocommerce_prices_include_tax', 'no');\n\n$category_ids = array();\nforeach (array('Desk Tools', 'Paper Goods', 'Travel') as $category_name) {\n    $term = term_exists($category_name, 'product_cat');\n    if (!$term) {\n        $term = wp_insert_term($category_name, 'product_cat');\n    }\n    if (!is_wp_error($term)) {\n        $category_ids[$category_name] = intval(is_array($term) ? $term['term_id'] : $term);\n    }\n}\n\n$products = array(\n    array('name' => 'Field Notes Set', 'sku' => 'NW-FIELD-001', 'price' => '14.00', 'stock' => 25, 'category' => 'Paper Goods', 'description' => 'A set of three compact notebooks for structured daily notes.'),\n    array('name' => 'Cable Organizer', 'sku' => 'NW-CABLE-002', 'price' => '9.50', 'stock' => 40, 'category' => 'Desk Tools', 'description' => 'A simple organizer for charging and desk cables.'),\n    array('name' => 'Travel Document Wallet', 'sku' => 'NW-TRAVEL-003', 'price' => '24.00', 'stock' => 12, 'category' => 'Travel', 'description' => 'A compact document wallet with labelled sections.'),\n    array('name' => 'Desk Planning Pad', 'sku' => 'NW-PLAN-004', 'price' => '18.00', 'stock' => 18, 'category' => 'Paper Goods', 'description' => 'An undated weekly planning pad for priorities and follow-ups.')\n);\n\n$created_ids = array();\nforeach ($products as $item) {\n    $existing_id = wc_get_product_id_by_sku($item['sku']);\n    if ($existing_id) {\n        $created_ids[] = $existing_id;\n        continue;\n    }\n    $product = new WC_Product_Simple();\n    $product->set_name($item['name']);\n    $product->set_sku($item['sku']);\n    $product->set_regular_price($item['price']);\n    $product->set_manage_stock(true);\n    $product->set_stock_quantity($item['stock']);\n    $product->set_stock_status('instock');\n    $product->set_description($item['description']);\n    if (isset($category_ids[$item['category']])) {\n        $product->set_category_ids(array($category_ids[$item['category']]));\n    }\n    $created_ids[] = $product->save();\n}\n\nif (!wc_get_product_id_by_sku('NW-NOTE-005')) {\n    $variable = new WC_Product_Variable();\n    $variable->set_name('Structured Notes Workbook');\n    $variable->set_sku('NW-NOTE-005');\n    $variable->set_description('A workbook available in two formats for testing variation behaviour.');\n\n    $attribute = new WC_Product_Attribute();\n    $attribute->set_name('Format');\n    $attribute->set_options(array('A5', 'A4'));\n    $attribute->set_visible(true);\n    $attribute->set_variation(true);\n    $variable->set_attributes(array($attribute));\n    if (isset($category_ids['Paper Goods'])) {\n        $variable->set_category_ids(array($category_ids['Paper Goods']));\n    }\n    $variable_id = $variable->save();\n\n    foreach (array(\n        array('format' => 'A5', 'price' => '16.00', 'stock' => 15),\n        array('format' => 'A4', 'price' => '22.00', 'stock' => 8)\n    ) as $data) {\n        $variation = new WC_Product_Variation();\n        $variation->set_parent_id($variable_id);\n        $variation->set_attributes(array('format' => $data['format']));\n        $variation->set_regular_price($data['price']);\n        $variation->set_manage_stock(true);\n        $variation->set_stock_quantity($data['stock']);\n        $variation->set_stock_status('instock');\n        $variation->save();\n    }\n    $created_ids[] = $variable_id;\n}\n\n$coupon = new WC_Coupon('WELCOME10');\nif (!$coupon->get_id()) {\n    $coupon = new WC_Coupon();\n    $coupon->set_code('WELCOME10');\n    $coupon->set_discount_type('percent');\n    $coupon->set_amount(10);\n    $coupon->set_usage_limit(100);\n    $coupon->set_description('Portfolio lab coupon for checkout testing.');\n    $coupon->save();\n}\n\n$zones = WC_Shipping_Zones::get_zones();\n$germany_exists = false;\nforeach ($zones as $zone_data) {\n    if ($zone_data['zone_name'] === 'Germany') {\n        $germany_exists = true;\n        break;\n    }\n}\nif (!$germany_exists) {\n    $zone = new WC_Shipping_Zone();\n    $zone->set_zone_name('Germany');\n    $zone->add_location('DE', 'country');\n    $instance_id = $zone->add_shipping_method('flat_rate');\n    $zone->save();\n    update_option(\n        'woocommerce_flat_rate_' . $instance_id . '_settings',\n        array('title' => 'Flat rate', 'tax_status' => 'taxable', 'cost' => '5.00')\n    );\n}\n\nif (!get_page_by_path('support-lab-brief')) {\n    wp_insert_post(array(\n        'post_type' => 'page',\n        'post_status' => 'publish',\n        'post_name' => 'support-lab-brief',\n        'post_title' => 'Support Lab Brief',\n        'post_content' => '<!-- wp:heading --><h2>Northwind Studio Support Lab</h2><!-- /wp:heading --><!-- wp:paragraph --><p>This disposable store was generated from a WordPress Playground Blueprint. It contains products, variations, a coupon, a Germany shipping zone, and test content for support exercises.</p><!-- /wp:paragraph --><!-- wp:list --><ul><li>Coupon: WELCOME10</li><li>Germany flat rate: €5</li><li>Variable product: Structured Notes Workbook</li><li>Use staging-style troubleshooting: document each change and restore the baseline when finished.</li></ul><!-- /wp:list -->'\n    ));\n}\n\nif (empty(wc_get_orders(array('limit' => 1)))) {\n    $order = wc_create_order();\n    if (!empty($created_ids)) {\n        $sample_product = wc_get_product($created_ids[0]);\n        if ($sample_product) {\n            $order->add_product($sample_product, 2);\n        }\n    }\n    $order->set_address(array(\n        'first_name' => 'Sample',\n        'last_name' => 'Customer',\n        'email' => 'sample@example.test',\n        'address_1' => 'Teststrasse 10',\n        'city' => 'Berlin',\n        'postcode' => '10115',\n        'country' => 'DE'\n    ), 'billing');\n    $order->set_address(array(\n        'first_name' => 'Sample',\n        'last_name' => 'Customer',\n        'address_1' => 'Teststrasse 10',\n        'city' => 'Berlin',\n        'postcode' => '10115',\n        'country' => 'DE'\n    ), 'shipping');\n    $order->calculate_totals();\n    $order->update_status('pending', 'Portfolio lab test order.');\n}\n\necho 'Northwind Studio WooCommerce lab created successfully.';\n"
+    }
+  ]
+}

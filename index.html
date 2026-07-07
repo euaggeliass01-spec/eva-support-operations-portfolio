@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI-Assisted Support Workflow — Eva S.</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+.article-wrap{width:min(920px,calc(100% - 36px));margin:0 auto}
+.article{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,5vw,54px);margin:28px 0 70px}
+.article h1{font-size:clamp(2.5rem,6vw,4.8rem)}
+.article h2{font-size:1.8rem;margin-top:34px}
+.article p,.article li{color:var(--muted)}
+.article pre{overflow:auto;background:var(--ink);color:white;padding:18px;border-radius:14px}
+.lab-actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}
+</style></head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Eva S.</a><div class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a></div></div></header>
+<main class="article-wrap">
+<div style="padding-top:28px"><a href="../index.html">← Back to portfolio</a></div>
+<article class="article">
+<span class="label lab">AI workflow prototype</span>
+<div class="lab-actions">
+<a class="btn" href="report.html">Review generated report</a>
+<a class="btn secondary" href="support_triage.py">Inspect Python source</a>
+<a class="btn secondary" href="triage_results.json">Inspect JSON output</a>
+</div>
+<h1>AI-Assisted Support Triage and Response QA</h1>
+<p><strong>Evidence type:</strong> Self-directed portfolio prototype<br />
+<strong>Status:</strong> Working local mode; optional schema-constrained AI mode<br />
+<strong>Safety model:</strong> Human review before any reply or account action</p>
+<h2>Problem</h2>
+<p>High-volume support creates repeated cognitive work:</p>
+<ul>
+<li>determine urgency;</li>
+<li>identify the likely domain;</li>
+<li>notice privacy, financial, security, or outage risk;</li>
+<li>ask for the missing evidence;</li>
+<li>prepare a useful first reply;</li>
+<li>avoid promising actions that have not happened.</li>
+</ul>
+<p>The risk is that speed can produce assumptions. This project treats AI as a constrained assistant, not as an autonomous support agent.</p>
+<h2>Workflow</h2>
+<pre><code class="language-text">CSV tickets
+   ↓
+PII redaction before optional API use
+   ↓
+Category + priority + sentiment
+   ↓
+Risk flags + human-review decision
+   ↓
+Missing information + troubleshooting actions
+   ↓
+Draft response
+   ↓
+JSON output + HTML review report
+</code></pre>
+<h2>Run without an API key</h2>
+<pre><code class="language-bash">python support_triage.py --mode local
+python -m unittest test_support_triage.py
+</code></pre>
+<p>Local mode uses transparent rules and standard-library Python only.</p>
+<h2>Optional AI mode</h2>
+<pre><code class="language-bash">pip install -r requirements.txt
+export OPENAI_API_KEY=&quot;...&quot;
+python support_triage.py --mode ai
+</code></pre>
+<p>The implementation uses the OpenAI Responses API with Pydantic structured output. Set <code>OPENAI_MODEL</code> to change the model.</p>
+<h2>Guardrails</h2>
+<ul>
+<li>No automatic sending.</li>
+<li>No claims that the tool checked a customer account, log, payment gateway, or website.</li>
+<li>No request for full payment-card data.</li>
+<li>Financial, security, privacy, and high-impact cases are flagged for human review.</li>
+<li>Obvious email addresses and phone numbers are redacted before optional API use.</li>
+<li>If AI mode is unavailable in <code>auto</code> mode, the workflow falls back to local analysis.</li>
+<li>Outputs are prompts for investigation, not diagnoses.</li>
+</ul>
+<h2>Evaluation set</h2>
+<p>The repository includes eight synthetic WooCommerce cases:</p>
+<ol>
+<li>charged card / pending order;</li>
+<li>missing customer email;</li>
+<li>missing German shipping rate;</li>
+<li>checkout plugin conflict;</li>
+<li>SSL/domain migration;</li>
+<li>performance regression;</li>
+<li>delayed refund;</li>
+<li>variation inventory error.</li>
+</ol>
+<h2>What worked</h2>
+<ul>
+<li>Structured fields made outputs easier to compare.</li>
+<li>Explicit “must not claim” instructions reduced false certainty.</li>
+<li>Human-review flags kept financial and outage scenarios visible.</li>
+<li>A deterministic fallback made the tool inspectable and testable.</li>
+</ul>
+<h2>What did not work well initially</h2>
+<p>An unconstrained draft prompt tended to write as though checks had already been performed. The workflow was revised to separate:</p>
+<ul>
+<li>evidence available now;</li>
+<li>evidence still needed;</li>
+<li>safe next action;</li>
+<li>claims that must not be made.</li>
+</ul>
+<h2>Next improvements</h2>
+<ul>
+<li>Add a small rubric to score reply clarity, empathy, and unsupported claims.</li>
+<li>Store reviewer corrections to build an evaluation set.</li>
+<li>Add multilingual drafting while preserving a single internal English summary.</li>
+<li>Connect categories to a maintained knowledge base instead of hard-coded actions.</li>
+</ul>
+
+</article></main>
+</body></html>

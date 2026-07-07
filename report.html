@@ -1,0 +1,214 @@
+<!doctype html><html><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Support Triage Workflow Report</title>
+    <style>
+    body{margin:0;background:#f4f1ea;color:#172326;font-family:system-ui,sans-serif;line-height:1.55}
+    main{width:min(1050px,calc(100% - 32px));margin:50px auto}
+    h1{font-size:clamp(2.5rem,6vw,5rem);letter-spacing:-.05em;line-height:1;margin-bottom:12px}
+    .intro{max-width:760px;color:#59676a;margin-bottom:36px}
+    .card{background:#fffdf8;border:1px solid #d6d9d4;border-radius:20px;padding:28px;margin:18px 0}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:#59676a}
+    .meta span{border:1px solid #d6d9d4;border-radius:999px;padding:4px 9px;font-size:.82rem}
+    .priority{font-weight:800}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    pre{white-space:pre-wrap;background:#eef3f1;padding:18px;border-radius:12px;font-family:inherit}
+    a{color:#0e6b64;font-weight:800}
+    @media(max-width:700px){.cols{grid-template-columns:1fr}}
+    </style></head><body><main>
+    <a href="../index.html">← Back to portfolio</a>
+    <h1>Support triage and QA report</h1>
+    <p class="intro">Generated from eight synthetic WooCommerce tickets. The workflow assists classification and drafting; it does not send messages or perform account actions. Financial, security, privacy, and outage cases remain under human review.</p>
+    
+        <article class="card">
+          <div class="meta">
+            <strong>WC-101</strong>
+            <span>Payments &amp; orders</span>
+            <span class="priority">High</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Concerned</p>
+          <p><strong>Risk flags:</strong> financial_action, high_customer_impact</p>
+          <p><strong>Human review:</strong> Required</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>order number</li><li>gateway transaction reference</li><li>order notes or gateway status</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Compare WooCommerce order notes with the payment gateway.</li><li>Confirm capture versus authorization before changing order status.</li><li>Check webhooks and gateway logs.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Customer charged, order still Pending payment”. I would first verify the current state rather than assume the visible symptom is the root cause. I will avoid changing or repeating a financial action until the gateway record is verified.
+
+Please share the order number, gateway transaction reference. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-102</strong>
+            <span>Email delivery</span>
+            <span class="priority">Medium</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Neutral</p>
+          <p><strong>Risk flags:</strong> None</p>
+          <p><strong>Human review:</strong> Recommended</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>affected order number</li><li>test-order result</li><li>mail log or sending method</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Confirm the relevant WooCommerce email is enabled.</li><li>Run a controlled test order and inspect mail logs.</li><li>Separate email generation from delivery/authentication.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Order emails are not reaching customers”. I would first verify the current state rather than assume the visible symptom is the root cause.
+
+Please share the affected order number, test-order result. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-103</strong>
+            <span>Shipping</span>
+            <span class="priority">Medium</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Neutral</p>
+          <p><strong>Risk flags:</strong> None</p>
+          <p><strong>Human review:</strong> Recommended</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>full test address</li><li>shipping-zone order</li><li>product shipping class</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Verify the full customer address and shipping-zone precedence.</li><li>Confirm the method is enabled and has a valid cost.</li><li>Retest with a clean browser session.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “German flat-rate shipping is missing at checkout”. I would first verify the current state rather than assume the visible symptom is the root cause.
+
+Please share the full test address, shipping-zone order. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-104</strong>
+            <span>Plugin conflict</span>
+            <span class="priority">Critical</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Concerned</p>
+          <p><strong>Risk flags:</strong> high_customer_impact</p>
+          <p><strong>Human review:</strong> Required</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>recent changes</li><li>browser/PHP logs</li><li>backup and staging availability</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Confirm a backup and use staging where possible.</li><li>Capture logs before changing components.</li><li>Change one variable at a time and preserve a rollback path.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Checkout broke after a plugin update”. I would first verify the current state rather than assume the visible symptom is the root cause. Before changing components, I would confirm that a current backup or staging environment is available.
+
+Please share the recent changes, browser/PHP logs. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-105</strong>
+            <span>Domain &amp; SSL</span>
+            <span class="priority">High</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Concerned</p>
+          <p><strong>Risk flags:</strong> security_or_trust, high_customer_impact</p>
+          <p><strong>Human review:</strong> Required</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>affected hostname</li><li>DNS target</li><li>certificate coverage and mixed-content evidence</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Verify DNS and certificate coverage.</li><li>Check WordPress URLs and redirects.</li><li>Run a serialized-data-safe URL replacement only after backup.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Connection is not private after domain change”. I would first verify the current state rather than assume the visible symptom is the root cause.
+
+Please share the affected hostname, DNS target. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-106</strong>
+            <span>Performance</span>
+            <span class="priority">Medium</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Neutral</p>
+          <p><strong>Risk flags:</strong> None</p>
+          <p><strong>Human review:</strong> Recommended</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>baseline URL and timing</li><li>hosting/server context</li><li>recent plugins or theme changes</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Collect a consistent baseline.</li><li>Inspect server, scheduled-action, script, and database evidence.</li><li>Test additions individually on staging.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Store became slow after page-builder installation”. I would first verify the current state rather than assume the visible symptom is the root cause.
+
+Please share the baseline URL and timing, hosting/server context. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-107</strong>
+            <span>Refunds</span>
+            <span class="priority">Medium</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Neutral</p>
+          <p><strong>Risk flags:</strong> financial_action</p>
+          <p><strong>Human review:</strong> Required</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>order number</li><li>gateway refund reference</li><li>automatic versus manual refund</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Verify the refund in both WooCommerce and the gateway.</li><li>Capture the provider refund reference.</li><li>Prevent duplicate financial action.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Refund completed, customer has not received funds”. I would first verify the current state rather than assume the visible symptom is the root cause. I will avoid changing or repeating a financial action until the gateway record is verified.
+
+Please share the order number, gateway refund reference. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+        <article class="card">
+          <div class="meta">
+            <strong>WC-108</strong>
+            <span>Inventory &amp; variations</span>
+            <span class="priority">Medium</span>
+            <span>mode: local</span>
+          </div>
+          <h2>Analysis</h2>
+          <p><strong>Sentiment:</strong> Neutral</p>
+          <p><strong>Risk flags:</strong> None</p>
+          <p><strong>Human review:</strong> Recommended</p>
+          <div class="cols"><div><h3>Missing information</h3><ul><li>product URL or ID</li><li>variation settings</li><li>cache/lookup-table state</li></ul></div>
+          <div><h3>Recommended actions</h3><ul><li>Check enabled status, price, stock status, and quantity for every variation.</li><li>Review parent-level stock settings and attribute combinations.</li><li>Regenerate lookup data and clear transients.</li></ul></div></div>
+          <h3>Draft reply for review</h3>
+          <pre>Hi,
+
+I understand the issue with “Variable product appears out of stock”. I would first verify the current state rather than assume the visible symptom is the root cause.
+
+Please share the product URL or ID, variation settings. I will use that information to narrow the issue and confirm the safest next step.
+
+Best,
+Eva</pre>
+        </article>
+        
+    </main></body></html>

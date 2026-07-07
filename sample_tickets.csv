@@ -1,0 +1,9 @@
+ticket_id,subject,message
+WC-101,"Customer charged, order still Pending payment","A customer says their card was charged, but the WooCommerce order is still marked Pending payment. They need the product dispatched today."
+WC-102,Order emails are not reaching customers,"The store owner receives new-order notifications, but customers do not receive processing or completed-order emails."
+WC-103,German flat-rate shipping is missing at checkout,"A merchant created a Germany shipping zone with a €5 flat rate, but customers in Berlin only see Local pickup."
+WC-104,Checkout broke after a plugin update,"After updating a discount plugin, the checkout spinner never stops and customers cannot place orders."
+WC-105,Connection is not private after domain change,The store moved to a new domain. Some visitors see a certificate warning and images still load from the old address.
+WC-106,Store became slow after page-builder installation,Product and checkout pages became noticeably slower after a new page builder and several add-ons were installed.
+WC-107,"Refund completed, customer has not received funds","WooCommerce shows a completed refund from three days ago, but the customer says the money is not back in their account."
+WC-108,Variable product appears out of stock,"A variable product says Out of stock on the shop page, although two size variations show stock quantities in the admin."
