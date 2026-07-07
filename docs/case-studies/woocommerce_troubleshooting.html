@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hands-On WooCommerce Troubleshooting — Eva S.</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+.case-hero{padding:72px 0 34px}
+.case-hero h1{font-size:clamp(2.8rem,7vw,6rem);max-width:980px;margin:18px 0 22px}
+.case-hero p{max-width:820px;color:var(--muted);font-size:1.13rem}
+.case-study{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:clamp(24px,4vw,46px);margin:22px 0 44px}
+.case-study h2{font-size:clamp(2rem,4vw,3.3rem);margin:15px 0}
+.case-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+.case-summary div{background:var(--soft);border-radius:14px;padding:16px}
+.case-summary strong{display:block;margin-bottom:5px}
+.case-summary span{color:var(--muted);font-size:.9rem}
+.evidence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+.evidence{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:white}
+.evidence img{display:block;width:100%;height:auto}
+.evidence figcaption{padding:13px 15px;color:var(--muted);font-size:.88rem}
+.reply-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.reply{background:#f4f1ea;border-radius:14px;padding:20px;white-space:pre-wrap}
+.finding{border-left:4px solid var(--gold);background:#f6eddc;padding:18px 20px;border-radius:0 14px 14px 0}
+@media(max-width:800px){.case-summary,.evidence-grid,.reply-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<a class="brand" href="../index.html">Eva S.</a>
+<nav class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a><a href="../woocommerce-lab/index.html">Live Lab</a></nav>
+</div></header>
+<main>
+<section class="case-hero"><div class="container">
+<span class="eyebrow">Hands-on technical evidence · July 2026</span>
+<h1>Three WooCommerce incidents reproduced, resolved, and verified.</h1>
+<p>These controlled portfolio exercises were completed inside a disposable WordPress Playground store. They are not presented as production customer incidents.</p>
+<div class="stats">
+<div class="stat"><strong>3</strong><span>completed troubleshooting exercises</span></div>
+<div class="stat"><strong>12</strong><span>evidence screenshots</span></div>
+<div class="stat"><strong>€5</strong><span>verified German flat-rate shipping</span></div>
+<div class="stat"><strong>#21</strong><span>test order completed and verified</span></div>
+</div>
+</div></section>
+
+<section><div class="container">
+
+<article class="case-study" id="shipping">
+<span class="label lab">Case 1 · Shipping</span>
+<h2>German flat-rate shipping missing at checkout</h2>
+<div class="case-summary">
+<div><strong>Impact</strong><span>No delivery option for a valid German address.</span></div>
+<div><strong>Root cause</strong><span>Flat rate disabled inside the matching zone.</span></div>
+<div><strong>Change</strong><span>Enabled Flat rate and restored Germany coverage.</span></div>
+<div><strong>Verification</strong><span>€5 displayed for postcode 10115 Berlin.</span></div>
+</div>
+<p>I confirmed the symptom at checkout, inspected the matching Germany zone, restored country-wide coverage, enabled the Flat rate method, and retested with a complete Berlin address.</p>
+<div class="evidence-grid">
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-no-option.webp" alt="Checkout with no shipping option"><figcaption>Reproduced symptom: no shipping option for Germany / 10115 Berlin.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-method-disabled.webp" alt="Disabled flat rate method"><figcaption>Root cause: Flat rate existed but was disabled.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-zone-restored.webp" alt="Restored Germany zone"><figcaption>Restored Germany coverage and enabled Flat rate.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-checkout-restored.webp" alt="Checkout with five euro shipping"><figcaption>Verified result: Flat rate — €5.00.</figcaption></figure>
+</div>
+<div class="reply-grid">
+<div><h3>Customer-facing reply</h3><div class="reply">Hi,
+
+I found that the Germany shipping zone was matching the address correctly, but the Flat rate method inside that zone was not active.
+
+I restored the method with the configured €5 cost and tested checkout again using a Berlin address. The shipping option is now appearing as expected.
+
+Best,
+Eva</div></div>
+<div><h3>Internal note</h3><div class="reply">Reproduced with Germany / 10115 Berlin.
+
+Flat rate was inactive in the matching zone. Restored Germany coverage, enabled the method at €5, and retested.
+
+Result: shipping displayed correctly.
+Risk: low; configuration-only change.</div></div>
+</div>
+</article>
+
+<article class="case-study" id="variation">
+<span class="label lab">Case 2 · Inventory</span>
+<h2>One variation unavailable while another remained in stock</h2>
+<div class="case-summary">
+<div><strong>Impact</strong><span>A5 could not be purchased.</span></div>
+<div><strong>Scope</strong><span>A4 remained available with eight units.</span></div>
+<div><strong>Root cause</strong><span>A5 quantity zero; no backorders.</span></div>
+<div><strong>Verification</strong><span>A5 restored to 15 units.</span></div>
+</div>
+<p>I compared both variations on the storefront. A4 remained available, isolating the problem to A5. The A5 variation had stock management enabled with a quantity of zero.</p>
+<div class="evidence-grid">
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-a5-baseline.webp" alt="A5 baseline"><figcaption>Known-good baseline: A5 with 15 units.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-stock-zero.webp" alt="A5 stock set to zero"><figcaption>Controlled failure: A5 quantity set to zero.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-a5-out-of-stock.webp" alt="A5 out of stock"><figcaption>Customer-visible symptom: A5 Out of stock.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-a4-unaffected.webp" alt="A4 unaffected"><figcaption>Scope check: A4 remained purchasable.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-stock-restored.webp" alt="A5 stock restored"><figcaption>Restoration: A5 returned to 15 units.</figcaption></figure>
+</div>
+<div class="reply-grid">
+<div><h3>Customer-facing reply</h3><div class="reply">Hi,
+
+I checked the individual variations and found that the A5 format had stock management enabled with a quantity of zero. The A4 format was unaffected.
+
+I restored the A5 quantity to 15 and verified that Add to cart is available again.
+
+Best,
+Eva</div></div>
+<div><h3>Internal note</h3><div class="reply">Parent product remained published. A4 worked normally. A5 had quantity 0 and backorders disabled.
+
+Restored A5 to 15 and verified storefront availability. A4 was not changed.</div></div>
+</div>
+</article>
+
+<article class="case-study" id="payment">
+<span class="label lab">Case 3 · Payments & orders</span>
+<h2>Checkout blocked because no payment method was available</h2>
+<div class="case-summary">
+<div><strong>Impact</strong><span>Customer could not complete checkout.</span></div>
+<div><strong>Root cause</strong><span>No payment gateway enabled.</span></div>
+<div><strong>Resolution</strong><span>Enabled Direct Bank Transfer.</span></div>
+<div><strong>Result</strong><span>Order #21 created for €23 and left On hold.</span></div>
+</div>
+<p>I enabled Direct Bank Transfer as a safe offline test method, completed checkout in a clean session, and verified the resulting order in the WooCommerce admin.</p>
+<div class="evidence-grid">
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/payment-checkout-restored.webp" alt="Checkout with bank transfer"><figcaption>Restored checkout: Direct Bank Transfer and €5 shipping.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/payment-order-received.webp" alt="Order received"><figcaption>Order #21 received for €23.</figcaption></figure>
+<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/payment-order-admin.webp" alt="On hold admin order"><figcaption>Admin verification: €18 item + €5 shipping; On hold.</figcaption></figure>
+</div>
+<div class="finding"><strong>Risk control:</strong> Creating a bank-transfer order is not proof that payment was received. The order correctly remained On hold.</div>
+<div class="reply-grid">
+<div><h3>Customer-facing reply</h3><div class="reply">Hi,
+
+Checkout was unable to proceed because the store did not have an enabled payment method.
+
+I enabled Direct Bank Transfer, retested the checkout, and confirmed that an order can now be created successfully. Bank-transfer orders remain On hold until payment is verified.
+
+Best,
+Eva</div></div>
+<div><h3>Internal note</h3><div class="reply">Enabled Direct Bank Transfer and placed test order #21:
+- Item: Desk Planning Pad, €18
+- Shipping: €5
+- Total: €23
+- Status: On hold
+
+Do not mark paid until transfer is verified.</div></div>
+</div>
+</article>
+
+<article class="case-study">
+<span class="label sim">Additional learning</span>
+<h2>Recognizing a contaminated test state</h2>
+<p>Repeated failed checkout attempts produced a stock-availability conflict in one disposable session. I restarted from a clean baseline rather than continue diagnosing an environment changed by prior tests.</p>
+<div class="finding"><strong>Lesson:</strong> Restore a known baseline before drawing conclusions when earlier tests may have changed sessions, orders, reservations, or stock.</div>
+</article>
+
+</div></section>
+</main>
+<footer><div class="container"><a href="../index.html">← Back to portfolio</a></div></footer>
+</body></html>
