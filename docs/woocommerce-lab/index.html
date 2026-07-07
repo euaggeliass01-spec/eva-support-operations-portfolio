@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WooCommerce Support Lab — Eva S.</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+.article-wrap{width:min(920px,calc(100% - 36px));margin:0 auto}
+.article{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,5vw,54px);margin:28px 0 70px}
+.article h1{font-size:clamp(2.5rem,6vw,4.8rem)}
+.article h2{font-size:1.8rem;margin-top:34px}
+.article p,.article li{color:var(--muted)}
+.article pre{overflow:auto;background:var(--ink);color:white;padding:18px;border-radius:14px}
+.lab-actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}
+</style></head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Eva S.</a><div class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a></div></div></header>
+<main class="article-wrap">
+<div style="padding-top:28px"><a href="../index.html">← Back to portfolio</a></div>
+<article class="article">
+<span class="label lab">Technical lab</span>
+<div class="lab-actions">
+<a class="btn" id="launch-lab" href="blueprint.json">Launch fresh lab</a>
+<a class="btn secondary" href="blueprint.json">Inspect Blueprint JSON</a>
+</div>
+<h1>Northwind Studio — WooCommerce Support Lab</h1>
+<p><strong>Evidence type:</strong> Self-directed technical lab<br />
+<strong>Platform:</strong> WordPress Playground<br />
+<strong>Purpose:</strong> Reproducible WooCommerce configuration and troubleshooting practice</p>
+<h2>What the Blueprint creates</h2>
+<ul>
+<li>latest WordPress with PHP 8.2;</li>
+<li>Storefront theme;</li>
+<li>WooCommerce;</li>
+<li>four simple products;</li>
+<li>one variable product with A5 and A4 variations;</li>
+<li>a 10% coupon (<code>WELCOME10</code>);</li>
+<li>a Germany shipping zone with a €5 flat rate;</li>
+<li>a synthetic pending order;</li>
+<li>a Support Lab Brief page.</li>
+</ul>
+<h2>Launch</h2>
+<p>After this repository is published on GitHub Pages, use the <strong>Launch WooCommerce lab</strong> button on the portfolio homepage. It builds a fresh browser-based WordPress instance from <code>blueprint.json</code>.</p>
+<p>You can also construct the URL manually:</p>
+<pre><code class="language-text">https://playground.wordpress.net/?blueprint-url=PUBLIC_URL_TO_THIS_BLUEPRINT
+</code></pre>
+<h2>Hands-on checklist before claiming this project in an application</h2>
+<p>Complete these actions yourself and record brief notes:</p>
+<ol>
+<li>Open Products and verify the four simple products and one variable product.</li>
+<li>Open the variable product and inspect both variations.</li>
+<li>Apply <code>WELCOME10</code> in a test cart.</li>
+<li>Enter a German shipping address and verify the €5 flat rate.</li>
+<li>Inspect the synthetic pending order and its order notes.</li>
+<li>Temporarily change one variation to out of stock, observe the storefront, and restore it.</li>
+<li>Disable the flat-rate method, reproduce the missing-shipping symptom, and restore it.</li>
+<li>Open WooCommerce status/log areas and note where you would collect evidence.</li>
+<li>Export or screenshot the final working state for the portfolio.</li>
+<li>Write one paragraph on what surprised you and what you had to troubleshoot.</li>
+</ol>
+<h2>Suggested application wording after completing the checklist</h2>
+<blockquote>
+<p>I built a reproducible WooCommerce support lab using WordPress Playground. The Blueprint installs WooCommerce and Storefront, creates products and variations, configures a coupon and a Germany shipping zone, and adds a synthetic order. I used the lab to reproduce and reverse common support problems, including missing shipping methods and variation stock errors. A specific challenge was making the environment repeatable rather than relying on a manually configured site, so I documented the setup as code and added a restoration checklist.</p>
+</blockquote>
+<h2>Limitations</h2>
+<p>This is a portfolio lab, not professional WordPress support experience. It should be described exactly that way.</p>
+
+</article></main>
+<script>
+(function(){
+  const b=document.getElementById('launch-lab');
+  if(location.protocol==='http:'||location.protocol==='https:'){
+    const blueprint=new URL('blueprint.json',location.href).href;
+    b.href='https://playground.wordpress.net/?blueprint-url='+encodeURIComponent(blueprint);
+    b.target='_blank'; b.rel='noopener';
+  }
+})();
+</script>
+</body></html>

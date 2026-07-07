@@ -1,0 +1,172 @@
+[
+  {
+    "ticket_id": "WC-101",
+    "category": "Payments & orders",
+    "priority": "High",
+    "sentiment": "Concerned",
+    "risk_flags": [
+      "financial_action",
+      "high_customer_impact"
+    ],
+    "needs_human_review": true,
+    "missing_information": [
+      "order number",
+      "gateway transaction reference",
+      "order notes or gateway status"
+    ],
+    "recommended_actions": [
+      "Compare WooCommerce order notes with the payment gateway.",
+      "Confirm capture versus authorization before changing order status.",
+      "Check webhooks and gateway logs."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Customer charged, order still Pending payment”. I would first verify the current state rather than assume the visible symptom is the root cause. I will avoid changing or repeating a financial action until the gateway record is verified.\n\nPlease share the order number, gateway transaction reference. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-102",
+    "category": "Email delivery",
+    "priority": "Medium",
+    "sentiment": "Neutral",
+    "risk_flags": [],
+    "needs_human_review": false,
+    "missing_information": [
+      "affected order number",
+      "test-order result",
+      "mail log or sending method"
+    ],
+    "recommended_actions": [
+      "Confirm the relevant WooCommerce email is enabled.",
+      "Run a controlled test order and inspect mail logs.",
+      "Separate email generation from delivery/authentication."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Order emails are not reaching customers”. I would first verify the current state rather than assume the visible symptom is the root cause.\n\nPlease share the affected order number, test-order result. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-103",
+    "category": "Shipping",
+    "priority": "Medium",
+    "sentiment": "Neutral",
+    "risk_flags": [],
+    "needs_human_review": false,
+    "missing_information": [
+      "full test address",
+      "shipping-zone order",
+      "product shipping class"
+    ],
+    "recommended_actions": [
+      "Verify the full customer address and shipping-zone precedence.",
+      "Confirm the method is enabled and has a valid cost.",
+      "Retest with a clean browser session."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “German flat-rate shipping is missing at checkout”. I would first verify the current state rather than assume the visible symptom is the root cause.\n\nPlease share the full test address, shipping-zone order. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-104",
+    "category": "Plugin conflict",
+    "priority": "Critical",
+    "sentiment": "Concerned",
+    "risk_flags": [
+      "high_customer_impact"
+    ],
+    "needs_human_review": true,
+    "missing_information": [
+      "recent changes",
+      "browser/PHP logs",
+      "backup and staging availability"
+    ],
+    "recommended_actions": [
+      "Confirm a backup and use staging where possible.",
+      "Capture logs before changing components.",
+      "Change one variable at a time and preserve a rollback path."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Checkout broke after a plugin update”. I would first verify the current state rather than assume the visible symptom is the root cause. Before changing components, I would confirm that a current backup or staging environment is available.\n\nPlease share the recent changes, browser/PHP logs. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-105",
+    "category": "Domain & SSL",
+    "priority": "High",
+    "sentiment": "Concerned",
+    "risk_flags": [
+      "security_or_trust",
+      "high_customer_impact"
+    ],
+    "needs_human_review": true,
+    "missing_information": [
+      "affected hostname",
+      "DNS target",
+      "certificate coverage and mixed-content evidence"
+    ],
+    "recommended_actions": [
+      "Verify DNS and certificate coverage.",
+      "Check WordPress URLs and redirects.",
+      "Run a serialized-data-safe URL replacement only after backup."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Connection is not private after domain change”. I would first verify the current state rather than assume the visible symptom is the root cause.\n\nPlease share the affected hostname, DNS target. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-106",
+    "category": "Performance",
+    "priority": "Medium",
+    "sentiment": "Neutral",
+    "risk_flags": [],
+    "needs_human_review": false,
+    "missing_information": [
+      "baseline URL and timing",
+      "hosting/server context",
+      "recent plugins or theme changes"
+    ],
+    "recommended_actions": [
+      "Collect a consistent baseline.",
+      "Inspect server, scheduled-action, script, and database evidence.",
+      "Test additions individually on staging."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Store became slow after page-builder installation”. I would first verify the current state rather than assume the visible symptom is the root cause.\n\nPlease share the baseline URL and timing, hosting/server context. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-107",
+    "category": "Refunds",
+    "priority": "Medium",
+    "sentiment": "Neutral",
+    "risk_flags": [
+      "financial_action"
+    ],
+    "needs_human_review": true,
+    "missing_information": [
+      "order number",
+      "gateway refund reference",
+      "automatic versus manual refund"
+    ],
+    "recommended_actions": [
+      "Verify the refund in both WooCommerce and the gateway.",
+      "Capture the provider refund reference.",
+      "Prevent duplicate financial action."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Refund completed, customer has not received funds”. I would first verify the current state rather than assume the visible symptom is the root cause. I will avoid changing or repeating a financial action until the gateway record is verified.\n\nPlease share the order number, gateway refund reference. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  },
+  {
+    "ticket_id": "WC-108",
+    "category": "Inventory & variations",
+    "priority": "Medium",
+    "sentiment": "Neutral",
+    "risk_flags": [],
+    "needs_human_review": false,
+    "missing_information": [
+      "product URL or ID",
+      "variation settings",
+      "cache/lookup-table state"
+    ],
+    "recommended_actions": [
+      "Check enabled status, price, stock status, and quantity for every variation.",
+      "Review parent-level stock settings and attribute combinations.",
+      "Regenerate lookup data and clear transients."
+    ],
+    "draft_reply": "Hi,\n\nI understand the issue with “Variable product appears out of stock”. I would first verify the current state rather than assume the visible symptom is the root cause.\n\nPlease share the product URL or ID, variation settings. I will use that information to narrow the issue and confirm the safest next step.\n\nBest,\nEva",
+    "mode": "local"
+  }
+]

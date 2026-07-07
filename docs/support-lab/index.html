@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Support Lab — Eva S.</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Eva S.</a><div class="nav-links"><a href="../index.html">Portfolio</a><a href="../ai-support-workflow/report.html">AI report</a></div></div></header>
+<main>
+<section class="hero" style="padding-bottom:32px"><div class="container">
+<span class="eyebrow">WordPress / WooCommerce support lab</span>
+<h1 style="font-size:clamp(3rem,6vw,5.5rem)">Eight cases. One repeatable method.</h1>
+<p class="lead">These are synthetic scenarios created to demonstrate reasoning, risk awareness, and written customer communication. They are not presented as tickets from real Automattic or WooCommerce customers.</p>
+</div></section>
+<section style="padding-top:24px"><div class="container">
+
+    <article class="case" id="WC-101" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority High">High</span>
+        <strong>WC-101</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Customer charged, order still Pending payment</h2>
+      <p><strong>Customer report</strong></p>
+      <p>A customer says their card was charged, but the WooCommerce order is still marked Pending payment. They need the product dispatched today.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Check WooCommerce order notes and exact timestamp.</li><li>Check gateway dashboard for capture, authorization, failure, or duplicate transaction.</li><li>Confirm webhook delivery and gateway logs.</li><li>Do not manually mark the order paid until settlement is verified.</li></ul>
+          <p><strong>Internal note:</strong> Escalate if money was captured but the webhook repeatedly fails. Preserve order and gateway IDs; never request card number or CVV.</p>
+          <p><strong>Core lesson:</strong> Distinguish a bank authorization from a captured payment before changing order state.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi there,
+
+I understand why this is concerning, especially when the payment appears on the card but the order has not moved forward.
+
+Before we change the order status, I would like to verify whether the payment gateway recorded a successful transaction or only a temporary authorization. Please send the order number and, if available, the payment transaction reference shown in your gateway dashboard. You do not need to send full card details.
+
+I will then compare the WooCommerce order notes with the gateway record. If the payment is confirmed, the order can be updated safely. If it is only an authorization or a failed capture, we will avoid dispatching the order until the gateway confirms settlement.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-102" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority Medium">Medium</span>
+        <strong>WC-102</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Order emails are not reaching customers</h2>
+      <p><strong>Customer report</strong></p>
+      <p>The store owner receives new-order notifications, but customers do not receive processing or completed-order emails.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Confirm Processing and Completed order emails are enabled.</li><li>Verify recipient address on affected orders.</li><li>Run a controlled test order and inspect email logs.</li><li>Check spam, sending reputation, SPF, DKIM, DMARC, and transactional mail configuration.</li></ul>
+          <p><strong>Internal note:</strong> Separate generation from delivery. A successful wp_mail call does not guarantee inbox delivery.</p>
+          <p><strong>Core lesson:</strong> Troubleshoot the full path: event → generation → handoff → authentication → mailbox.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+Since the admin notification is arriving, WooCommerce is generating at least some email events. I would first check whether the customer emails are enabled and whether the affected orders contain valid billing email addresses.
+
+Next, I would run a controlled test order and inspect the mail log. If WordPress reports that the message was sent but it never arrives, the issue is likely delivery or authentication rather than the WooCommerce email template itself. At that point, I would verify the site&#x27;s sending domain, SPF/DKIM configuration, and SMTP or transactional email setup.
+
+Please share one affected order number and the result of a fresh test order. Avoid posting customer email addresses publicly.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-103" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority Medium">Medium</span>
+        <strong>WC-103</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">German flat-rate shipping is missing at checkout</h2>
+      <p><strong>Customer report</strong></p>
+      <p>A merchant created a Germany shipping zone with a €5 flat rate, but customers in Berlin only see Local pickup.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Check the customer&#x27;s complete shipping address and postcode.</li><li>Review shipping-zone order and matching rules.</li><li>Confirm the flat-rate method is enabled and has a valid cost.</li><li>Check product type, shipping class, and package restrictions.</li><li>Retest with a clean session.</li></ul>
+          <p><strong>Internal note:</strong> Do not assume the displayed address is the shipping address; billing and shipping can differ.</p>
+          <p><strong>Core lesson:</strong> Shipping-zone precedence is a common source of configuration errors.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+I would check the zone matching order first. WooCommerce uses the first shipping zone that matches the customer&#x27;s address, so a broader zone placed above Germany can prevent the Germany-specific rate from being used.
+
+Please confirm that:
+1. the customer&#x27;s full German address is entered at checkout,
+2. the Germany zone is above broader European zones,
+3. Flat rate is enabled inside that zone,
+4. the product is not restricted by a shipping class or virtual-product setting.
+
+After saving the zone, test in a private browser window with a Berlin postcode so cached checkout data does not affect the result.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-104" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority Critical">Critical</span>
+        <strong>WC-104</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Checkout broke after a plugin update</h2>
+      <p><strong>Customer report</strong></p>
+      <p>After updating a discount plugin, the checkout spinner never stops and customers cannot place orders.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Confirm current backup and staging availability.</li><li>Capture console, network, PHP, and WooCommerce logs.</li><li>Disable only the most likely changed component.</li><li>Retest with a default theme and minimal plugin set on staging.</li><li>Roll back or escalate with reproducible evidence.</li></ul>
+          <p><strong>Internal note:</strong> Revenue-impacting outage. Prioritize restoration, then root-cause analysis. Document every change.</p>
+          <p><strong>Core lesson:</strong> Change one variable at a time and preserve a rollback path.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+Because checkout is currently unavailable, the immediate goal is to restore a working purchase path while preserving evidence for diagnosis.
+
+If a staging site is available, I would reproduce the issue there first. Otherwise, I would place the store in a controlled maintenance window, capture the browser-console error and WooCommerce logs, then temporarily deactivate the recently updated discount plugin. If checkout returns, we have a strong conflict signal and can keep the plugin disabled while testing a rollback or compatibility fix.
+
+Before changing anything, please confirm that a current backup exists. I would avoid updating several plugins at once, because that makes the cause harder to isolate.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-105" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority High">High</span>
+        <strong>WC-105</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Connection is not private after domain change</h2>
+      <p><strong>Customer report</strong></p>
+      <p>The store moved to a new domain. Some visitors see a certificate warning and images still load from the old address.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Verify DNS records and certificate coverage for all active hostnames.</li><li>Check WordPress Address and Site Address.</li><li>Use a serialized-data-safe search and replace after backup.</li><li>Clear caches and inspect mixed-content requests.</li><li>Confirm redirects from the old domain.</li></ul>
+          <p><strong>Internal note:</strong> Never run a raw SQL replace on serialized WordPress data without a safe tool and backup.</p>
+          <p><strong>Core lesson:</strong> Separate certificate validity, canonical URLs, redirects, and mixed content.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+This appears to involve two related layers: the SSL certificate for the new domain and old URLs still stored in the site database or cache.
+
+I would first verify that the new domain and its www/non-www version both point to the correct host and are covered by an active certificate. Once HTTPS is valid, I would check the WordPress Address and Site Address, then run a safe search-and-replace for old-domain URLs using a backup and a tool that handles serialized data correctly.
+
+Finally, I would clear the site, CDN, and browser caches and test for mixed-content requests in the browser console.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-106" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority Medium">Medium</span>
+        <strong>WC-106</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Store became slow after page-builder installation</h2>
+      <p><strong>Customer report</strong></p>
+      <p>Product and checkout pages became noticeably slower after a new page builder and several add-ons were installed.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Measure response time on consistent URLs.</li><li>Check server resources, logs, scheduled actions, and database load.</li><li>Test add-ons individually on staging.</li><li>Review image sizes, scripts, and third-party requests.</li><li>Exclude cart, checkout, and account pages from unsafe caching.</li></ul>
+          <p><strong>Internal note:</strong> Performance work needs baselines. Do not recommend random optimization plugins without evidence.</p>
+          <p><strong>Core lesson:</strong> Measure, isolate, change, and retest.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+I would establish a before-and-after baseline rather than guessing from the plugin list. The most useful first checks are server response time, slow requests, database queries, image weight, and whether the slowdown affects all pages or only builder-generated layouts.
+
+On a staging copy, I would disable the new add-ons one at a time, clear caches between tests, and compare the same product and checkout pages. I would also check scheduled actions and error logs for repeated background jobs.
+
+The checkout should be tested carefully because aggressive caching or optimization can break cart sessions even when a speed score improves.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-107" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority Medium">Medium</span>
+        <strong>WC-107</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Refund completed, customer has not received funds</h2>
+      <p><strong>Customer report</strong></p>
+      <p>WooCommerce shows a completed refund from three days ago, but the customer says the money is not back in their account.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Compare WooCommerce order notes with gateway refund status.</li><li>Confirm whether the refund was automatic or manually recorded.</li><li>Capture the provider refund reference.</li><li>Avoid issuing a duplicate refund.</li></ul>
+          <p><strong>Internal note:</strong> Financial-risk case. Human verification is required before repeating any transaction.</p>
+          <p><strong>Core lesson:</strong> A WooCommerce status and a processor settlement are related but not identical.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+A completed WooCommerce refund confirms that the refund action was recorded, but the payment provider and the customer&#x27;s bank determine when the funds become visible.
+
+I would check the order notes and gateway dashboard for a refund transaction ID and status. If the gateway confirms the refund, I would share the provider reference and advise the customer that bank processing times vary. I would not promise an exact arrival date unless the payment provider publishes one for that transaction.
+
+If WooCommerce shows a refund but the gateway has no matching record, the refund may have been recorded manually and needs further review before any second refund is attempted.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="case" id="WC-108" style="margin-bottom:22px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="label sim">Simulated support case</span>
+        <span class="priority Medium">Medium</span>
+        <strong>WC-108</strong>
+      </div>
+      <h2 style="font-size:2.2rem;margin:16px 0">Variable product appears out of stock</h2>
+      <p><strong>Customer report</strong></p>
+      <p>A variable product says Out of stock on the shop page, although two size variations show stock quantities in the admin.</p>
+      <div class="two-col" style="margin-top:20px">
+        <div>
+          <h3>Investigation plan</h3>
+          <ul><li>Check variation enabled status, price, stock status, and quantity.</li><li>Verify attribute combinations and default selection.</li><li>Review parent-level inventory settings.</li><li>Regenerate lookup tables and clear product transients.</li><li>Retest without cache.</li></ul>
+          <p><strong>Internal note:</strong> Quantities alone do not guarantee purchasability; price and enabled status matter.</p>
+          <p><strong>Core lesson:</strong> Inspect both parent and variation-level data.</p>
+        </div>
+        <div>
+          <h3>First customer reply</h3>
+          <div style="white-space:pre-wrap;background:#f4f1ea;border-radius:14px;padding:18px">Hi,
+
+I would check whether each variation is enabled, has a price, and is set to In stock. A variation can have a quantity but still be unavailable if its stock status, price, or attributes are incomplete.
+
+I would also review the parent product&#x27;s stock-management setting and confirm that every variation has a unique, valid combination of attributes. After saving the variations, I would regenerate product lookup data and clear transients or caches before retesting the product page.
+
+Please share a screenshot of the variation settings with customer information removed.
+
+Best,
+Eva</div>
+        </div>
+      </div>
+    </article>
+    
+</div></section>
+</main>
+<footer><div class="container"><a href="../index.html">← Back to portfolio</a></div></footer>
+</body></html>
