@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Hands-On WooCommerce Troubleshooting — Eva S.</title>
-<link rel="stylesheet" href="../styles.css">
+<link href="../styles.css" rel="stylesheet"/>
 <style>
 .case-hero{padding:72px 0 34px}
 .case-hero h1{font-size:clamp(2.8rem,7vw,6rem);max-width:980px;margin:18px 0 22px}
@@ -24,10 +25,10 @@
 .finding{border-left:4px solid var(--gold);background:#f6eddc;padding:18px 20px;border-radius:0 14px 14px 0}
 @media(max-width:800px){.case-summary,.evidence-grid,.reply-grid{grid-template-columns:1fr}}
 </style>
-</head>
+<script defer="True" src="../profile.js"></script></head>
 <body>
 <header class="site-header"><div class="container nav">
-<a class="brand" href="../index.html">Eva S.</a>
+<a class="brand" data-profile-display-name="" href="../index.html">Eva S.</a>
 <nav class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a><a href="../woocommerce-lab/index.html">Live Lab</a></nav>
 </div></header>
 <main>
@@ -42,9 +43,7 @@
 <div class="stat"><strong>#21</strong><span>test order completed and verified</span></div>
 </div>
 </div></section>
-
 <section><div class="container">
-
 <article class="case-study" id="shipping">
 <span class="label lab">Case 1 · Shipping</span>
 <h2>German flat-rate shipping missing at checkout</h2>
@@ -56,10 +55,10 @@
 </div>
 <p>I confirmed the symptom at checkout, inspected the matching Germany zone, restored country-wide coverage, enabled the Flat rate method, and retested with a complete Berlin address.</p>
 <div class="evidence-grid">
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-no-option.webp" alt="Checkout with no shipping option"><figcaption>Reproduced symptom: no shipping option for Germany / 10115 Berlin.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-method-disabled.webp" alt="Disabled flat rate method"><figcaption>Root cause: Flat rate existed but was disabled.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-zone-restored.webp" alt="Restored Germany zone"><figcaption>Restored Germany coverage and enabled Flat rate.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/shipping-checkout-restored.webp" alt="Checkout with five euro shipping"><figcaption>Verified result: Flat rate — €5.00.</figcaption></figure>
+<figure class="evidence"><img alt="Checkout with no shipping option" src="../assets/woocommerce-troubleshooting/shipping-no-option.webp"/><figcaption>Reproduced symptom: no shipping option for Germany / 10115 Berlin.</figcaption></figure>
+<figure class="evidence"><img alt="Disabled flat rate method" src="../assets/woocommerce-troubleshooting/shipping-method-disabled.webp"/><figcaption>Root cause: Flat rate existed but was disabled.</figcaption></figure>
+<figure class="evidence"><img alt="Restored Germany zone" src="../assets/woocommerce-troubleshooting/shipping-zone-restored.webp"/><figcaption>Restored Germany coverage and enabled Flat rate.</figcaption></figure>
+<figure class="evidence"><img alt="Checkout with five euro shipping" src="../assets/woocommerce-troubleshooting/shipping-checkout-restored.webp"/><figcaption>Verified result: Flat rate — €5.00.</figcaption></figure>
 </div>
 <div class="reply-grid">
 <div><h3>Customer-facing reply</h3><div class="reply">Hi,
@@ -78,7 +77,6 @@ Result: shipping displayed correctly.
 Risk: low; configuration-only change.</div></div>
 </div>
 </article>
-
 <article class="case-study" id="variation">
 <span class="label lab">Case 2 · Inventory</span>
 <h2>One variation unavailable while another remained in stock</h2>
@@ -90,11 +88,11 @@ Risk: low; configuration-only change.</div></div>
 </div>
 <p>I compared both variations on the storefront. A4 remained available, isolating the problem to A5. The A5 variation had stock management enabled with a quantity of zero.</p>
 <div class="evidence-grid">
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-a5-baseline.webp" alt="A5 baseline"><figcaption>Known-good baseline: A5 with 15 units.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-stock-zero.webp" alt="A5 stock set to zero"><figcaption>Controlled failure: A5 quantity set to zero.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-a5-out-of-stock.webp" alt="A5 out of stock"><figcaption>Customer-visible symptom: A5 Out of stock.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-a4-unaffected.webp" alt="A4 unaffected"><figcaption>Scope check: A4 remained purchasable.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/variation-stock-restored.webp" alt="A5 stock restored"><figcaption>Restoration: A5 returned to 15 units.</figcaption></figure>
+<figure class="evidence"><img alt="A5 baseline" src="../assets/woocommerce-troubleshooting/variation-a5-baseline.webp"/><figcaption>Known-good baseline: A5 with 15 units.</figcaption></figure>
+<figure class="evidence"><img alt="A5 stock set to zero" src="../assets/woocommerce-troubleshooting/variation-stock-zero.webp"/><figcaption>Controlled failure: A5 quantity set to zero.</figcaption></figure>
+<figure class="evidence"><img alt="A5 out of stock" src="../assets/woocommerce-troubleshooting/variation-a5-out-of-stock.webp"/><figcaption>Customer-visible symptom: A5 Out of stock.</figcaption></figure>
+<figure class="evidence"><img alt="A4 unaffected" src="../assets/woocommerce-troubleshooting/variation-a4-unaffected.webp"/><figcaption>Scope check: A4 remained purchasable.</figcaption></figure>
+<figure class="evidence"><img alt="A5 stock restored" src="../assets/woocommerce-troubleshooting/variation-stock-restored.webp"/><figcaption>Restoration: A5 returned to 15 units.</figcaption></figure>
 </div>
 <div class="reply-grid">
 <div><h3>Customer-facing reply</h3><div class="reply">Hi,
@@ -110,9 +108,8 @@ Eva</div></div>
 Restored A5 to 15 and verified storefront availability. A4 was not changed.</div></div>
 </div>
 </article>
-
 <article class="case-study" id="payment">
-<span class="label lab">Case 3 · Payments & orders</span>
+<span class="label lab">Case 3 · Payments &amp; orders</span>
 <h2>Checkout blocked because no payment method was available</h2>
 <div class="case-summary">
 <div><strong>Impact</strong><span>Customer could not complete checkout.</span></div>
@@ -122,9 +119,9 @@ Restored A5 to 15 and verified storefront availability. A4 was not changed.</div
 </div>
 <p>I enabled Direct Bank Transfer as a safe offline test method, completed checkout in a clean session, and verified the resulting order in the WooCommerce admin.</p>
 <div class="evidence-grid">
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/payment-checkout-restored.webp" alt="Checkout with bank transfer"><figcaption>Restored checkout: Direct Bank Transfer and €5 shipping.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/payment-order-received.webp" alt="Order received"><figcaption>Order #21 received for €23.</figcaption></figure>
-<figure class="evidence"><img src="../assets/woocommerce-troubleshooting/payment-order-admin.webp" alt="On hold admin order"><figcaption>Admin verification: €18 item + €5 shipping; On hold.</figcaption></figure>
+<figure class="evidence"><img alt="Checkout with bank transfer" src="../assets/woocommerce-troubleshooting/payment-checkout-restored.webp"/><figcaption>Restored checkout: Direct Bank Transfer and €5 shipping.</figcaption></figure>
+<figure class="evidence"><img alt="Order received" src="../assets/woocommerce-troubleshooting/payment-order-received.webp"/><figcaption>Order #21 received for €23.</figcaption></figure>
+<figure class="evidence"><img alt="On hold admin order" src="../assets/woocommerce-troubleshooting/payment-order-admin.webp"/><figcaption>Admin verification: €18 item + €5 shipping; On hold.</figcaption></figure>
 </div>
 <div class="finding"><strong>Risk control:</strong> Creating a bank-transfer order is not proof that payment was received. The order correctly remained On hold.</div>
 <div class="reply-grid">
@@ -145,14 +142,12 @@ Eva</div></div>
 Do not mark paid until transfer is verified.</div></div>
 </div>
 </article>
-
 <article class="case-study">
 <span class="label sim">Additional learning</span>
 <h2>Recognizing a contaminated test state</h2>
 <p>Repeated failed checkout attempts produced a stock-availability conflict in one disposable session. I restarted from a clean baseline rather than continue diagnosing an environment changed by prior tests.</p>
 <div class="finding"><strong>Lesson:</strong> Restore a known baseline before drawing conclusions when earlier tests may have changed sessions, orders, reservations, or stock.</div>
 </article>
-
 </div></section>
 </main>
 <footer><div class="container"><a href="../index.html">← Back to portfolio</a></div></footer>

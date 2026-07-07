@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>AI-Assisted Support Workflow — Eva S.</title>
-<link rel="stylesheet" href="../styles.css">
+<link href="../styles.css" rel="stylesheet"/>
 <style>
 .article-wrap{width:min(920px,calc(100% - 36px));margin:0 auto}
 .article{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,5vw,54px);margin:28px 0 70px}
@@ -11,9 +12,9 @@
 .article p,.article li{color:var(--muted)}
 .article pre{overflow:auto;background:var(--ink);color:white;padding:18px;border-radius:14px}
 .lab-actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}
-</style></head>
+</style><script defer="True" src="../profile.js"></script></head>
 <body>
-<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Eva S.</a><div class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a></div></div></header>
+<header class="site-header"><div class="container nav"><a class="brand" data-profile-display-name="" href="../index.html">Eva S.</a><div class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a></div></div></header>
 <main class="article-wrap">
 <div style="padding-top:28px"><a href="../index.html">← Back to portfolio</a></div>
 <article class="article">
@@ -24,8 +25,8 @@
 <a class="btn secondary" href="triage_results.json">Inspect JSON output</a>
 </div>
 <h1>AI-Assisted Support Triage and Response QA</h1>
-<p><strong>Evidence type:</strong> Self-directed portfolio prototype<br />
-<strong>Status:</strong> Working local mode; optional schema-constrained AI mode<br />
+<p><strong>Evidence type:</strong> Self-directed portfolio prototype<br/>
+<strong>Status:</strong> Working local mode; optional schema-constrained AI mode<br/>
 <strong>Safety model:</strong> Human review before any reply or account action</p>
 <h2>Problem</h2>
 <p>High-volume support creates repeated cognitive work:</p>
@@ -60,7 +61,7 @@ python -m unittest test_support_triage.py
 <p>Local mode uses transparent rules and standard-library Python only.</p>
 <h2>Optional AI mode</h2>
 <pre><code class="language-bash">pip install -r requirements.txt
-export OPENAI_API_KEY=&quot;...&quot;
+export OPENAI_API_KEY="..."
 python support_triage.py --mode ai
 </code></pre>
 <p>The implementation uses the OpenAI Responses API with Pydantic structured output. Set <code>OPENAI_MODEL</code> to change the model.</p>
@@ -108,6 +109,5 @@ python support_triage.py --mode ai
 <li>Add multilingual drafting while preserving a single internal English summary.</li>
 <li>Connect categories to a maintained knowledge base instead of hard-coded actions.</li>
 </ul>
-
 </article></main>
 </body></html>

@@ -6,65 +6,128 @@
 <title>Remote Hospitality Operations — Eva S.</title>
 <link rel="stylesheet" href="../styles.css">
 <style>
-.article-wrap{width:min(900px,calc(100% - 36px));margin:0 auto}
-.article{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,5vw,54px);margin:36px 0 70px}
-.article h1{font-size:clamp(2.5rem,6vw,4.8rem);margin-bottom:24px}
-.article h2{font-size:1.8rem;margin:34px 0 14px}
-.article h3{font-size:1.25rem;margin:28px 0 10px}
-.article p,.article li{color:var(--muted)}
-.article blockquote{margin:24px 0;padding:16px 20px;border-left:4px solid var(--accent);background:var(--soft)}
-.article code{background:#edf1ef;border-radius:6px;padding:2px 5px}
-.article pre{overflow:auto;background:var(--ink);color:white;padding:18px;border-radius:14px}
-.article hr{margin:36px 0}
-.topline{padding:26px 0 0}
+.ops-hero{padding:72px 0 34px}
+.ops-hero h1{font-size:clamp(2.8rem,7vw,5.8rem);max-width:1000px;margin:18px 0 22px}
+.ops-hero p{max-width:820px;color:var(--muted);font-size:1.13rem}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}
+.metric{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px}
+.metric strong{display:block;font-size:2rem;letter-spacing:-.04em}
+.metric span{color:var(--muted);font-size:.9rem}
+.ops-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,4vw,42px);margin:20px 0}
+.ops-card h2{font-size:clamp(1.9rem,4vw,3rem);margin-bottom:18px}
+.ops-card li,.ops-card p{color:var(--muted)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.review{background:var(--soft);border-radius:18px;padding:22px}
+.review p{font-size:1.05rem;color:var(--ink);margin:0 0 14px}
+.review span{font-size:.83rem;color:var(--muted)}
+.evidence-grid{display:grid;grid-template-columns:.55fr 1.45fr;gap:18px;margin-top:24px;align-items:start}
+.evidence{margin:0;background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.evidence img{display:block;width:100%;height:auto}
+.evidence figcaption{padding:12px 14px;color:var(--muted);font-size:.85rem}
+@media(max-width:800px){.metric-grid,.review-grid,.evidence-grid{grid-template-columns:1fr}}
 </style>
+<script src="../profile.js" defer></script>
 </head>
 <body>
-<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Eva S.</a><div class="nav-links"><a href="../index.html">Portfolio</a><a href="../support-lab/index.html">Support Lab</a></div></div></header>
-<main class="article-wrap">
-<div class="topline"><a href="../index.html">← Back to portfolio</a></div>
-<article class="article"><h1>Case Study: Remote Hospitality Operations and Customer Support</h1>
-<p><strong>Evidence type:</strong> Real professional experience<br />
-<strong>Duration:</strong> Four years<br />
-<strong>Channels:</strong> Written platform messaging, email-style guest communication, phone when required, remote coordination</p>
-<h2>Context</h2>
-<p>Short-term accommodation support combines customer communication with operational responsibility. Guests may arrive late, misunderstand access instructions, lose connectivity, encounter an electricity issue, or need a fast answer during checkout. The work must be handled remotely, often with incomplete information and without adding unnecessary friction.</p>
-<h2>Responsibilities</h2>
+<header class="site-header">
+<div class="container nav">
+<a class="brand" data-profile-display-name href="../index.html">Eva S.</a>
+<nav class="nav-links">
+<a href="../index.html">Portfolio</a>
+<a href="woocommerce_troubleshooting.html">WooCommerce Evidence</a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="ops-hero">
+<div class="container">
+<span class="eyebrow">Real customer-facing experience · 4 years</span>
+<h1>Remote guest support backed by measurable operating volume.</h1>
+<p>I managed the full guest journey for two short-term rental properties while coordinating local collaborators and solving practical problems remotely.</p>
+<div class="metric-grid">
+<div class="metric"><strong>2</strong><span>properties managed</span></div>
+<div class="metric"><strong>~15</strong><span>reservations per month</span></div>
+<div class="metric"><strong>~40</strong><span>guest conversations per week</span></div>
+<div class="metric"><strong>6</strong><span>collaborators coordinated</span></div>
+<div class="metric"><strong>4.78/5</strong><span>current host rating</span></div>
+<div class="metric"><strong>9</strong><span>published reviews</span></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<article class="ops-card">
+<span class="label real">Real professional experience</span>
+<h2>Responsibilities and operating scope</h2>
+<div class="two-col">
+<div>
 <ul>
-<li>Prepared and refined pre-arrival instructions for access codes, key boxes, Wi-Fi, electricity activation, terrace use, and house-specific details.</li>
-<li>Adapted communication to guests who wanted minimal interaction as well as guests who needed step-by-step guidance.</li>
-<li>Coordinated cleaners, maintenance, access, and apartment readiness remotely.</li>
-<li>Managed checkout instructions, late-checkout flexibility, wet-towel handling, key return, and door security.</li>
-<li>Corrected errors quickly and directly when information such as an access code needed to be updated.</li>
+<li>Pre-arrival, check-in, in-stay, and checkout communication.</li>
+<li>Access codes, key boxes, Wi-Fi, television, electricity, and property instructions.</li>
+<li>Late arrivals, late checkout, complaints, service recovery, and review follow-up.</li>
+<li>Cleaning, maintenance, apartment readiness, and on-site handoffs.</li>
 </ul>
-<h2>Support approach</h2>
-<ol>
-<li>State the practical next step early.</li>
-<li>Use plain language and numbered instructions when sequence matters.</li>
-<li>Avoid blaming the customer or another collaborator.</li>
-<li>Confirm what is safe to try remotely.</li>
-<li>Escalate physical or security-sensitive issues to an on-site person.</li>
-<li>Close the loop after the issue is resolved.</li>
-</ol>
-<h2>Transfer to technical support</h2>
-<p>The subject matter changes, but the support mechanics are similar:</p>
+</div>
+<div>
 <ul>
-<li>translate a system into clear customer actions;</li>
-<li>identify what information is missing;</li>
-<li>distinguish an inconvenience from a time-critical or security-sensitive incident;</li>
-<li>coordinate a handoff without losing context;</li>
-<li>document reusable instructions so the same confusion is less likely to recur.</li>
+<li>Coordinated six cleaners, maintenance providers, owners, and local collaborators.</li>
+<li>Handled sensitive complaints, including a theft allegation involving a cleaning collaborator and a hygiene/pest complaint.</li>
+<li>Balanced guest care with neutral documentation and fair treatment of collaborators.</li>
+<li>Escalated physical issues while preserving context during handoffs.</li>
 </ul>
-<h2>Evidence still to add before submission</h2>
-<p>Add only verified metrics you can defend, such as:</p>
-<ul>
-<li>number of properties supported;</li>
-<li>approximate stays or conversations per month;</li>
-<li>response-time or guest-rating evidence;</li>
-<li>number of collaborators coordinated;</li>
-<li>a concrete before/after result from a template or process improvement.</li>
-</ul>
+</div>
+</div>
 </article>
+
+<article class="ops-card">
+<span class="label real">Initiative and process improvement</span>
+<h2>Automation and remote troubleshooting</h2>
+<div class="two-col">
+<div>
+<h3>Automated communication</h3>
+<p>Created repeatable messages for pre-arrival, check-in, Wi-Fi, property use, and checkout, improving consistency during busy periods.</p>
+</div>
+<div>
+<h3>Remote technical support</h3>
+<p>Developed step-by-step troubleshooting for Wi-Fi, television, access, and check-in issues, escalating only when physical intervention was necessary.</p>
+</div>
+</div>
+</article>
+
+<article class="ops-card">
+<span class="label real">Published customer feedback</span>
+<h2>What guests specifically noticed</h2>
+<div class="review-grid">
+<div class="review"><p>“Everything was perfectly prepared: finding the accommodation, access, and equipment.”</p><span>Translated review excerpt · June 2025</span></div>
+<div class="review"><p>“Thank you for the good, fast, and precise communication.”</p><span>Translated review excerpt · September 2024</span></div>
+<div class="review"><p>“The check-in was very easy with clear, simple instructions.”</p><span>Published review excerpt · September 2023</span></div>
+</div>
+
+<div class="evidence-grid">
+<figure class="evidence">
+<img src="../assets/airbnb/host-profile-metrics.webp" alt="Host-profile metrics">
+<figcaption>Current host profile: 9 reviews, 4.78 average rating, and 4 years of experience.</figcaption>
+</figure>
+<figure class="evidence">
+<img src="../assets/airbnb/anonymized-review-excerpts.webp" alt="Anonymized guest review excerpts">
+<figcaption>Guest names and profile images have been anonymized.</figcaption>
+</figure>
+</div>
+</article>
+
+<article class="ops-card">
+<span class="label real">Transfer to technical support</span>
+<h2>Why this experience is relevant</h2>
+<p>The subject matter changes, but the support mechanics remain the same: gather incomplete information, assess impact, explain the next safe action, coordinate handoffs without losing context, and remain accountable until the issue is resolved.</p>
+</article>
+
+</div>
+</section>
 </main>
+
+<footer><div class="container"><a href="../index.html">← Back to portfolio</a></div></footer>
 </body>
 </html>
